@@ -1,0 +1,15 @@
+77.1875 % med
+build_random_trees(local_train, 784, 8, 5, 20, round(len(local_train)*0.65))
+
+og
+
+filename = 'train.csv'
+test_filename = 'test.csv'
+filename_dir = 'input/'
+dataset = load_csv(filename_dir + filename)
+testdata = load_csv(filename_dir + test_filename)
+smaller_dataset = dataset[1:10000]
+testdata = testdata
+
+local_train = dataset[1:800]
+local_test = dataset[800:4000]
