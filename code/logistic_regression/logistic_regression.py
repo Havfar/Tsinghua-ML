@@ -25,13 +25,12 @@ class LogisticRegression:
 
     def predict(self, X, threshold=0.5):
         test = self.predict_prob(X)
-        print(test)
-        return test >= threshold
+        print(test[0:10])
+        return test
 
     def fit(self, X, y):
         if self.fit_intercept:
             X = self.__add_intercept(X)
-
         self.theta  = np.zeros(X.shape[1])
 
         for i in range(self.num_iter):
@@ -41,11 +40,6 @@ class LogisticRegression:
             h = self.__sigmoid(z)
             gradient = np.dot(X.T, (h-y))/y.size
             self.theta -= self.lr * gradient
-
-            # if (self.verbose == True and i % 10000 == 0):
-            #     z = np.dot(X, self.theta)
-            #     h = self.__sigmoid(z)
-            #     print(f'loss: {self.__loss(h, y)} \t')
 
 
 trainData = pd.read_csv("../../input/train.csv").values

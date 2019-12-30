@@ -6,7 +6,7 @@ from scipy.stats import norm
 class GuassianNB():
 
     def fit(self, X_train, y_train):
-        self.min_std = 0.00000001
+        self.min_std = 0.000001
         self.nclass = np.unique(y_train).shape[0]
         self.class_labels = np.unique(y_train)
         self.nfeature = X_train.shape[1]
@@ -31,14 +31,8 @@ class GuassianNB():
         label = self.class_labels[np.argmax(log_py_on_x, axis=1)]
         return label
 
-    def score(self, X_test, y_test):
-        y_predict = self.predict(X_test)
-        return (y_predict == y_test).mean()
-
-
 
 if __name__ == "__main__":
-    import matplotlib.pyplot as plt
     import pandas as pd
     print("LOADING DATA")
     #load data
@@ -48,6 +42,7 @@ if __name__ == "__main__":
     clf = GuassianNB()
 
     # Training dataset
+    train_data = train_data
     xTrain = train_data[0:, 1:]
     yTrain = train_data[0:, 0]
 
