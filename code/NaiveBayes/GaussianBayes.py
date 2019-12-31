@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from scipy.stats import norm
+import time
 
 
 class GuassianNB():
@@ -36,9 +37,10 @@ if __name__ == "__main__":
     import pandas as pd
     print("LOADING DATA")
     #load data
-    train_data = pd.read_csv("../../input/train.csv").values
-    test_data = pd.read_csv("../../input/test.csv").values
+    train_data = pd.read_csv("./input/train.csv").values
+    test_data = pd.read_csv("./input/test.csv").values
 
+    t1 = time.time()
     clf = GuassianNB()
 
     # Training dataset
@@ -51,8 +53,11 @@ if __name__ == "__main__":
     # Predict value
     predtictY = clf.predict(test_data)
 
+    t2= time.time()
+    print("training time:", str(t2-t1))
+
     # Create submission file
     df_sub = pd.DataFrame(list(range(1, len(test_data) + 1)))
     df_sub.columns = ["ImageID"]
     df_sub["Label"] = predtictY
-    df_sub.to_csv("../../output/havlearn_GaussianNaiveBayes.csv", index=False)
+    df_sub.to_csv("./output/havlearn_GaussianNaiveBayes.csv", index=False)

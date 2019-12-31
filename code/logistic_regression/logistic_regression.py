@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import time
 from sklearn import datasets
 
 class LogisticRegression:
@@ -23,7 +24,7 @@ class LogisticRegression:
             X = self.__add_intercept(X)
         return self.__sigmoid(np.dot(X, self.theta))
 
-    def predict(self, X, threshold=0.5):
+    def predict(self, X, threshold=0.1):
         test = self.predict_prob(X)
         print(test[0:10])
         return test
@@ -42,20 +43,24 @@ class LogisticRegression:
             self.theta -= self.lr * gradient
 
 
-trainData = pd.read_csv("../../input/train.csv").values
-testData = pd.read_csv("../../input/test.csv").values
+trainData = pd.read_csv("./input/train.csv").values
+testData = pd.read_csv("./input/test.csv").values
 trainData1 = datasets.load_digits()
 print(trainData1.images.shape)
 print(trainData.shape)
 #Training dataset
 xTrain = trainData[0:, 1:]
 yTrain = trainData[0:,0]
+t1 = time.time()
 model = LogisticRegression()
 model.fit(xTrain, yTrain)
+
 # Predict value
 predtictY = model.predict(testData)
+t2 = time.time()
+print("training time:", str(t2-t1))
 # Create submission file
 df_sub = pd.DataFrame(list(range(1,len(testData)+1)))
 df_sub.columns = ["ImageID"]
 df_sub["Label"] = predtictY
-df_sub.to_csv("../../output/havlearn_LR.csv",index=False)
+df_sub.to_csv("./output/havlearn_LR.csv",index=False)
