@@ -1,7 +1,4 @@
-from collections import Counter
-
 import pandas as pd
-import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
 trainData = pd.read_csv("../../input/train.csv").values

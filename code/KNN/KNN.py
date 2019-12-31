@@ -10,21 +10,21 @@ class KNN():
         self.X_train = X
         self.y_train = y
 
-    def predict(self, X, k=7):
-        dists = self.compute_distances(X)
+    def predict(self, X, k=50):
+        distance = self.compute_distances(X)
 
-        num_test = dists.shape[0]
-        y_pred = np.zeros(num_test)
+        num_test = distance.shape[0]
+        y_prediction = np.zeros(num_test)
 
         for i in range(num_test):
-            k_closest_y = []
-            labels = self.y_train[np.argsort(dists[i,:])].flatten()
-            # find k nearest lables
-            k_closest_y = labels[:k]
-            c = Counter(k_closest_y)
-            y_pred[i] = c.most_common(1)[0][0]
+            k_closest_to_y = []
 
-        return(y_pred)
+            labels = self.y_train[np.argsort(distance[i,:])].flatten()
+            k_closest_to_y = labels[:k]
+            counter = Counter(k_closest_to_y)
+            y_prediction[i] = counter.most_common(1)[0][0]
+
+        return(y_prediction)
 
     def compute_distances(self, X):
         dot_pro = np.dot(X, self.X_train.T)
@@ -48,4 +48,4 @@ predtictY = model.predict(testData)
 df_sub = pd.DataFrame(list(range(1,len(testData)+1)))
 df_sub.columns = ["ImageID"]
 df_sub["Label"] = predtictY
-df_sub.to_csv("../../output/9-NN.csv",index=False)
+df_sub.to_csv("../../output/50-NN.csv",index=False)
