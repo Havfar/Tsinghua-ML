@@ -77,11 +77,12 @@ if __name__ == "__main__":
   test_images = test_images.reshape(test_images.shape[0], 28, 28)
 
   cnn = CNN()
-  cnn.run(train_images=train_images, train_labels=train_labels, epochs=5)
+  cnn.run(train_images=train_images, train_labels=train_labels, epochs=12)
   predtictY = cnn.predict(test_data)
 
   # Create submission file
   df_sub = pd.DataFrame(list(range(1, len(test_data) + 1)))
   df_sub.columns = ["ImageID"]
   df_sub["Label"] = predtictY
-  df_sub.to_csv("../../output/havlearn_cnn.csv", index=False)
+  df_sub.to_csv("../../output/CNN-12.csv", index=False)
+1

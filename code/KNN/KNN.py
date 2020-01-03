@@ -1,3 +1,4 @@
+import time
 from collections import Counter
 
 import pandas as pd
@@ -10,7 +11,7 @@ class KNN():
         self.X_train = X
         self.y_train = y
 
-    def predict(self, X, k=50):
+    def predict(self, X, k=1):
         distance = self.compute_distances(X)
 
         num_test = distance.shape[0]
@@ -41,11 +42,16 @@ print(trainData.shape)
 xTrain = trainData[0:, 1:]
 yTrain = trainData[0:,0]
 model = KNN()
+t1 = time.time()
 model.fit(xTrain, yTrain)
+
 # Predict value
 predtictY = model.predict(testData)
+t2 = time.time()
+print("time:", t2-t1)
+
 # Create submission file
 df_sub = pd.DataFrame(list(range(1,len(testData)+1)))
 df_sub.columns = ["ImageID"]
 df_sub["Label"] = predtictY
-df_sub.to_csv("../../output/50-NN.csv",index=False)
+df_sub.to_csv("../../output/KNN.csv",index=False)

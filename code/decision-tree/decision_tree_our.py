@@ -38,7 +38,6 @@ def unique_vals(rows, col):
     """Find the unique values for a column in a dataset."""
     return set([row[col] for row in rows])
 
-# Bare kjører gjennom settet og mapper label til antall av labelen i en dict
 def class_counts(rows):
     """Counts the number of each type of example in a dataset."""
     counts = {}  # a dictionary of label -> count.
@@ -276,15 +275,10 @@ if __name__ == '__main__':
   
     predictions = []
     for row in testdata[1:]:
-        #print(leaf_pred(classify(row, my_tree)))
         predictions.append(leaf_pred(classify(row, my_tree)))
     print(len(predictions))
     len(testdata)
-    #print(predictions)
-    """for row in testdata:
-        print ("Actual: %s. Predicted: %s" %
-               (row[0], print_leaf(classify(row, my_tree))))"""
-    
+
     # Create submission file
     df_sub = pd.DataFrame(list(range(1,len(testdata))))
     df_sub.columns = ["ImageID"]

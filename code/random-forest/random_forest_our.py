@@ -379,21 +379,6 @@ if __name__ == '__main__':
 
     t2 = time.time()
     print("training time:", str(t2-t1))
-
-    #print(predictions)
-    """for row in testdata:
-        print ("Actual: %s. Predicted: %s" %
-               (row[0], print_leaf(classify(row, my_tree))))"""
-    
-    #Local check accuracy
-    """
-    correct = 0
-    for x in range(len(local_test)):
-        if predictions[x] == local_test[x][0]:
-            correct = correct +1
-    print("Accuracy:", correct/len(local_test)*100, "%")"""
-
-    
     # Create submission file
     print("Len(testdata):", len(testdata))
     print("Len(predictions):", len(predictions))

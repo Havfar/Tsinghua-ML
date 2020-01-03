@@ -226,4 +226,4 @@ if __name__ == "__main__":
     df_sub = pd.DataFrame(list(range(1, len(test_data) + 1)))
     df_sub.columns = ["ImageID"]
     df_sub["Label"] = predtictY
-    df_sub.to_csv("../../output/havlearn_NaiveBayes.csv", index=False)
+    df_sub.to_csv("../../output/NaiveBayes.csv", index=False)
